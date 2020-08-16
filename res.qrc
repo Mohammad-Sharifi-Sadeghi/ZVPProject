@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>bomb.png</file>
+        <file>bullet.png</file>
+        <file>defeat.png</file>
+        <file>firstStage.png</file>
+        <file>nextround.png</file>
+        <file>secondStage.png</file>
+        <file>shooterplant.png</file>
+        <file>stagevictory.png</file>
+        <file>sun.png</file>
+        <file>sunflower.png</file>
+        <file>theend.png</file>
+        <file>thirdStage.png</file>
+        <file>wallnut.png</file>
+        <file>zombie.png</file>
+        <file>zombieBoss.png</file>
+    </qresource>
+    <qresource prefix="/musics"/>
+</RCC>
