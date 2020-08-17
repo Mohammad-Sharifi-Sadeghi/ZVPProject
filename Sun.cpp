@@ -2,6 +2,7 @@
 #include <QTimer>
 #include "Game.h"
 #include <QDebug>
+#include <QMediaPlayer>
 
 extern Game* game;
 Sun::Sun(int x, int y, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(parent){
@@ -14,6 +15,11 @@ Sun::Sun(int x, int y, QGraphicsItem* parent) : QObject(), QGraphicsPixmapItem(p
 }
 
 void Sun::mousePressEvent(QGraphicsSceneMouseEvent * event){
+
+    QMediaPlayer* moneyPlayer = new QMediaPlayer();
+    moneyPlayer->setMedia(QUrl("qrc:/musics/money.mp3"));
+    moneyPlayer->play();
+
     game->setMoney(game->getMoney() + 25);
     game->scene->removeItem(this);
     delete this;

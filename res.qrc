@@ -16,5 +16,14 @@
         <file>zombie.png</file>
         <file>zombieBoss.png</file>
     </qresource>
-    <qresource prefix="/musics"/>
+    <qresource prefix="/musics">
+        <file>victory.mp3</file>
+        <file>zombieBite.ogg</file>
+        <file>zombieBossGroan.ogg</file>
+        <file>zombieGroan.ogg</file>
+        <file>bgmusic.mp3</file>
+        <file>money.mp3</file>
+        <file>stageVictory.ogg</file>
+        <file>stageDefeat.ogg</file>
+    </qresource>
 </RCC>

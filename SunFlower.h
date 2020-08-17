@@ -4,14 +4,14 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
+#include "Plant.h"
 
 #include <QGraphicsSceneMouseEvent>
 
-class SunFlower : public QObject, public QGraphicsPixmapItem{
+class SunFlower : public Plant{
         Q_OBJECT
 public:
     SunFlower(int, int, int, QGraphicsItem* = 0);
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
     int currentField;
 
 };

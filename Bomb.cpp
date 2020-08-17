@@ -12,8 +12,6 @@ extern Game* game;
 Bomb::Bomb(int x, int y, QGraphicsItem* parent):QObject(), QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/bomb.png"));
     setPos(x, y);
-    //QPointF attack_area_Point = mapToScene(0,0);
-    //qDebug() << attack_area_Point.x() << "     " << attack_area_Point.y();
     attack_area = new QGraphicsRectItem(this);
     attack_area->setPos(-100,-150);
     attack_area->setRect(0 ,0,300,450);

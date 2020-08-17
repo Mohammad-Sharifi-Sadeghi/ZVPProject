@@ -9,8 +9,7 @@ extern Game* game;
 Bullet::Bullet(int x, int y, int fps, QGraphicsItem* parent) : QObject() , QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/bullet.png"));
     setPos(x, y);
-    this->x = x;
-    this->y = y;
+    this->fps = fps;
     QTimer* timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(50);
@@ -27,13 +26,12 @@ void Bullet::move(){
             return;
         }
     }
-    if(x > 800){
+    if(x() > 800){
         game->scene->removeItem(this);
         delete this;
         return;
     }
 
-    setPos(x + 45, y);
-    x += 45;
+    setPos(x() + 5*fps, y());
 
 }

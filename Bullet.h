@@ -12,7 +12,8 @@ public:
 public slots:
     void move();
 private:
-    int x, y;
+    int fps;
+
 
 };
 #endif // BULLET_H

@@ -15,6 +15,8 @@
 #include "Bomb.h"
 #include <QList>
 #include "ThirdStage.h"
+#include "Plant.h"
+#include <QMediaPlayer>
 
 
 
@@ -25,7 +27,7 @@ Game::Game(QWidget *parent){
     setFixedSize(800,750);
 
     toBePlacedType = 0;
-
+    player = new QMediaPlayer();
     // set up the scene
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,800,750);
@@ -79,7 +81,7 @@ void Game::mousePressEvent(QMouseEvent * event){
         toBePlacedType = 2;
     }else if(event->x() < 396 && event->x() > 308 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0 && money >= 150 && stage > 1){
         toBePlacedType = 3;
-    }else if(event->x() < 491 && event->x() > 396 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0 && money >= 150 ){
+    }else if(event->x() < 491 && event->x() > 396 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0 && money >= 150 && stage > 2){
         toBePlacedType = 4;
     }else if(event->x() < 645 && event->x() > 491 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0){
         qDebug() << "taking shovel";
@@ -90,13 +92,13 @@ void Game::mousePressEvent(QMouseEvent * event){
         if(event->x() > i*100 && event->x() < (i+1)*100 && event->y() > 224 && event->y() < 374 && event->button() == Qt::LeftButton && toBePlacedType != 0 ){
             if(!isFieldFull[i+1]){
                 if(toBePlacedType == 1){
-                    ShooterPlant* sp = new ShooterPlant(i*100,234,1,i+1);
+                    Plant* sp = new ShooterPlant(i*100,234,i+1);
                     isFieldFull[i+1] = true;
                     toBePlacedType = 0;
                     setMoney(getMoney() - 100);
                     qDebug() << "using shooter";
                 }else if(toBePlacedType == 2){
-                    SunFlower* sf = new SunFlower(i*100,234,i+1);
+                    Plant* sf = new SunFlower(i*100,234,i+1);
                     isFieldFull[i+1] = true;
                     toBePlacedType = 0;
                     setMoney(getMoney() - 50);
@@ -122,12 +124,12 @@ void Game::mousePressEvent(QMouseEvent * event){
             if(event->x() > i*100 && event->x() < (i+1)*100 && event->y() > 374 && event->y() < 524 && event->button() == Qt::LeftButton && toBePlacedType != 0 ){
                 if(!isFieldFull[i+8]){
                     if(toBePlacedType == 1){
-                        ShooterPlant* sp = new ShooterPlant(i*100,384,1,i+8);
+                        Plant* sp = new ShooterPlant(i*100,384,i+8);
                         isFieldFull[i+8] = true;
                         toBePlacedType = 0;
                         setMoney(getMoney() - 100);
                     }else if(toBePlacedType == 2){
-                        SunFlower* sf = new SunFlower(i*100,384,i+8);
+                        Plant* sf = new SunFlower(i*100,384,i+8);
                         isFieldFull[i+8] = true;
                         toBePlacedType = 0;
                         setMoney(getMoney() - 50);
@@ -153,12 +155,12 @@ void Game::mousePressEvent(QMouseEvent * event){
             if(event->x() > i*100 && event->x() < (i+1)*100 && event->y() > 524 && event->y() < 674 && event->button() == Qt::LeftButton && toBePlacedType != 0 ){
                 if(!isFieldFull[i+15]){
                     if(toBePlacedType == 1){
-                        ShooterPlant* sp = new ShooterPlant(i*100,534,1,i+15);
+                        Plant* sp = new ShooterPlant(i*100,534,i+15);
                         isFieldFull[i+15] = true;
                         toBePlacedType = 0;
                         setMoney(getMoney() - 100);
                     }else if(toBePlacedType == 2){
-                        SunFlower* sf = new SunFlower(i*100,534,i+15);
+                        Plant* sf = new SunFlower(i*100,534,i+15);
                         isFieldFull[i+15] = true;
                         toBePlacedType = 0;
                         setMoney(getMoney() - 50);
@@ -203,7 +205,7 @@ void Game::start(){
     // clear the screen
     scene->clear();
     // set up money
-    money = 99999;
+    money = 0;
     //clearing the fields
     for(int i = 0;i < 22;++i){
         isFieldFull[i] = false;
@@ -234,6 +236,8 @@ void Game::update(){
 void Game::showVictory(){
 // create the title text
 
+    player->setMedia(QUrl("qrc:/musics/stageVictory.ogg"));
+    player->play();
     scene->setBackgroundBrush(QBrush(QImage(":/images/stagevictory.png")));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("Victory !!!"));
     QFont titleFont("comic sans",50);
@@ -265,6 +269,8 @@ void Game::showVictory(){
 }
 
 void Game::showDefeated(){
+    player->setMedia(QUrl("qrc:/musics/stageDefeat.ogg"));
+    player->play();
     scene->clear();
     scene->setBackgroundBrush(QBrush(QImage(":/images/defeat.png")));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("DEFEATED !!!"));

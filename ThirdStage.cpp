@@ -24,6 +24,10 @@ ThirdStage::ThirdStage(int part){
     QTimer* sunSpawnTimer = new QTimer(this);
     connect(sunSpawnTimer,SIGNAL(timeout()),game,SLOT(sunSpawn()));
     sunSpawnTimer->start(10000);
+    backGroundMusic = new QMediaPlayer(this);
+    backGroundMusic->setMedia(QUrl("qrc:/musics/bgmusic.mp3"));
+    backGroundMusic->play();
+    backGroundMusic->setVolume(20);
 
 }
 
@@ -89,6 +93,7 @@ void ThirdStage::timeCounter(){
             game->scene->addItem(thirdZombie);
         }else if(second == 67){
             PartVictory* pv = new PartVictory();
+            backGroundMusic->setPosition(0);
             part = 2;
             second = 0;
             game->part = 2;
@@ -149,6 +154,7 @@ void ThirdStage::timeCounter(){
             game->scene->addItem(thirdZombie);
         }else if(second == 67){
             PartVictory* pv = new PartVictory();
+            backGroundMusic->setPosition(0);
             part = 3;
             game->part = 3;
             second = 0;
@@ -208,6 +214,7 @@ void ThirdStage::timeCounter(){
             connect(thirdZombie,SIGNAL(endReached()),this,SLOT(defeat()));
             game->scene->addItem(thirdZombie);
         }else if(second == 63){
+
             game->scene->clear();
             game->showEnd();
         }

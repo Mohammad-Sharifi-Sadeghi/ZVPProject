@@ -1,4 +1,5 @@
-QT       += core gui
+QT       += core gui \
+        multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,6 +23,7 @@ SOURCES += \
     FirstStage.cpp \
     Game.cpp \
     PartVictory.cpp \
+    Plant.cpp \
     SecondStage.cpp \
     ShooterPlant.cpp \
     Sun.cpp \
@@ -38,6 +40,7 @@ HEADERS += \
     FirstStage.h \
     Game.h \
     PartVictory.h \
+    Plant.h \
     SecondStage.h \
     ShooterPlant.h \
     Sun.h \

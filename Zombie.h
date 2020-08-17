@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
+#include <QMediaPlayer>
 
 class Zombie : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -16,6 +17,7 @@ public slots:
     void move();
 private:
     int fps, health;
+    QMediaPlayer* zombieBitePlayer;
 };
 
 #endif // ZOMBIE_H

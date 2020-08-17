@@ -22,6 +22,12 @@ SecondStage::SecondStage(int part){
     QTimer* sunSpawnerTimer = new QTimer(this);
     connect(sunSpawnerTimer,SIGNAL(timeout()),game,SLOT(sunSpawn()));
     sunSpawnerTimer->start(10000);
+
+    backGroundMusic = new QMediaPlayer(this);
+    backGroundMusic->setMedia(QUrl("qrc:/musics/bgmusic.mp3"));
+    backGroundMusic->play();
+    backGroundMusic->setVolume(20);
+
 }
 
 void SecondStage::timeCounter(){
@@ -61,12 +67,14 @@ void SecondStage::timeCounter(){
             game->scene->addItem(zombie);
         }else if(second == 76){
             PartVictory* pv = new PartVictory();
+            backGroundMusic->setPosition(0);
             game->part = 2;
             part = 2;
             second = 0;
 
         }
     }else if(part == 2){
+
         qDebug() << second;
         if(second == 45){
             Zombie* zombie = new Zombie(800,firstRow,1,4,false);
@@ -119,13 +127,10 @@ void SecondStage::showPartVictory(){
 }
 
 void SecondStage::defeat(){
+    game->scene->clear();
     game->showDefeated();
     game->toBePlacedType = 0;
-    qDebug() << "first line";
-    game->scene->clear();
-    qDebug() << "second line";
 
-    qDebug() << "third line";
     delete this;
 }
 

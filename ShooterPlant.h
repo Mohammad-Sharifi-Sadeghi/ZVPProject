@@ -4,14 +4,14 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-
+#include "Plant.h"
 #include <QGraphicsSceneMouseEvent>
 
-class ShooterPlant : public QObject, public QGraphicsPixmapItem{
+class ShooterPlant : public Plant{
     Q_OBJECT
 public:
-    ShooterPlant(int , int , int, int, QGraphicsItem* = 0);
-    void mousePressEvent(QGraphicsSceneMouseEvent*);
+    ShooterPlant(int , int , int, QGraphicsItem* = 0);
+
 
 
     int currentField;

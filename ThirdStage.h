@@ -1,7 +1,7 @@
 #ifndef THIRDSTAGE_H
 #define THIRDSTAGE_H
 
-
+#include <QMediaPlayer>
 #include <QObject>
 
 
@@ -15,6 +15,7 @@ public slots:
 private:
     void dice();
     int firstRow, secondRow, thirdRow, second, part;
+    QMediaPlayer* backGroundMusic;
 };
 
 #endif // THIRDSTAGE_H

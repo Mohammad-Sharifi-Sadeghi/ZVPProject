@@ -4,7 +4,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-
+#include <QMediaPlayer>
 
 class SecondStage : public QObject{
     Q_OBJECT
@@ -17,6 +17,7 @@ public slots:
 private:
     int firstRow, secondRow, part, second;
     void dice();
+    QMediaPlayer* backGroundMusic;
 };
 
 #endif // SECONDSTAGE_H

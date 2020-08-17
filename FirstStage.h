@@ -5,7 +5,7 @@
 
 #include <QObject>
 #include <QMouseEvent>
-
+#include <QMediaPlayer>
 #include <QString>
 
 
@@ -20,7 +20,7 @@ public slots:
     void defeat();
 private:
     bool isPlacing;
-
+    QMediaPlayer* backGroundMusic;
     int second;
 
 };

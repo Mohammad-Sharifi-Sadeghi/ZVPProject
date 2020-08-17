@@ -1,4 +1,4 @@
-#include "Firststage.h"
+#include "FirstStage.h"
 #include "Game.h"
 #include <QImage>
 #include <QBrush>
@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QPointF>
 #include <QLineF>
+#include <QMediaPlayer>
 
 extern Game* game;
 
@@ -29,6 +30,13 @@ FirstStage::FirstStage(){
     connect(sunSpawnTimer,SIGNAL(timeout()),game,SLOT(sunSpawn()));
 
     sunSpawnTimer->start(10000);
+
+    //background sound
+    backGroundMusic = new QMediaPlayer(this);
+    backGroundMusic->setMedia(QUrl("qrc:/musics/bgmusic.mp3"));
+    backGroundMusic->play();
+    backGroundMusic->setVolume(20);
+
 }
 
 
@@ -40,15 +48,15 @@ void FirstStage::timeCounter(){
         Zombie* zombie = new Zombie(800,234,1,4,false);
         connect(zombie,SIGNAL(endReached()),this,SLOT(defeat()));
         game->scene->addItem(zombie);
-    }else if(second == 5){
+    }else if(second == 54){
         Zombie* zombie = new Zombie(800,234,1,4,false);
          connect(zombie,SIGNAL(endReached()),this,SLOT(defeat()));
         game->scene->addItem(zombie);
-    }else if(second == 6){
+    }else if(second == 57){
         Zombie* zombie = new Zombie(800,234,1,4,false);
          connect(zombie,SIGNAL(endReached()),this,SLOT(defeat()));
         game->scene->addItem(zombie);
-    }else if(second == 7){
+    }else if(second == 59){
         Zombie* zombie = new Zombie(800,234,1,4,false);
          connect(zombie,SIGNAL(endReached()),this,SLOT(defeat()));
         game->scene->addItem(zombie);
@@ -60,6 +68,7 @@ void FirstStage::timeCounter(){
         game->stage = 2;
         game->part = 1;
         game->scene->clear();
+        backGroundMusic->stop();
         game->showVictory();
         delete this;
     }
@@ -67,9 +76,8 @@ void FirstStage::timeCounter(){
 
 void FirstStage::defeat(){
     game->toBePlacedType = 0;
-    qDebug() << "second line";
-    game->showDefeated();
-    qDebug() << "third line";
+    backGroundMusic->stop();
+    game->showDefeated();    
     delete this;
 }
 

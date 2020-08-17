@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsWidget>
+#include <QMediaPlayer>
 
 
 class Game : public QGraphicsView{
@@ -35,7 +36,7 @@ private:
 
     int money;
 
-
+    QMediaPlayer* player;
     QGraphicsTextItem* moneyTextItem;
     void update();
 };
