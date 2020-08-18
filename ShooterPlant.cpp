@@ -17,7 +17,7 @@ ShooterPlant::ShooterPlant(int x, int y, int currentField, QGraphicsItem* parent
 
     QTimer* timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(shoot()));
-    timer->start(1000);
+    timer->start(500);
 }
 
 

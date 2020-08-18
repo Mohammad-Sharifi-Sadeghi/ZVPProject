@@ -14,7 +14,7 @@ public:
 
 
 
-    int currentField;
+
 public slots:
     void shoot();
 private:

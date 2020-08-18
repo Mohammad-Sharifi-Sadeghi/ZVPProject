@@ -32,6 +32,6 @@ void Bullet::move(){
         return;
     }
 
-    setPos(x() + 5*fps, y());
+    setPos(x() + 40*fps, y());
 
 }

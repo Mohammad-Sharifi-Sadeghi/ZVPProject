@@ -9,10 +9,9 @@
 class SecondStage : public QObject{
     Q_OBJECT
 public:
-    SecondStage(int );
+    SecondStage();
 public slots:
     void timeCounter();
-    void showPartVictory();
     void defeat();
 private:
     int firstRow, secondRow, part, second;

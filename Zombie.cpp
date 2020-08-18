@@ -6,6 +6,7 @@
 #include "ShooterPlant.h"
 #include "SunFlower.h"
 #include <QMediaPlayer>
+#include "Bomb.h"
 
 extern Game* game;
 
@@ -61,18 +62,17 @@ void Zombie::move(){
             game->isFieldFull[static_cast<ShooterPlant*>(colliding_items[i])->currentField] = false;
             game->scene->removeItem(colliding_items[i]);
             delete colliding_items[i];
-            qDebug() << "destroying plant";
+
         }else if(typeid(*(colliding_items[i])) == typeid (SunFlower)){
             if(zombieBitePlayer->state()== QMediaPlayer::PlayingState){
                 zombieBitePlayer->setPosition(0);
-
-            }else if(zombieBitePlayer->state() == QMediaPlayer::StoppedState){
+            }if(zombieBitePlayer->state() == QMediaPlayer::StoppedState){
                 zombieBitePlayer->play();
             }
             game->isFieldFull[static_cast<SunFlower*>(colliding_items[i])->currentField] = false;
             game->scene->removeItem(colliding_items[i]);
             delete colliding_items[i];
-            qDebug() << "destroying plant";
+
         }
     }
     setPos(x() - 5*fps,y());

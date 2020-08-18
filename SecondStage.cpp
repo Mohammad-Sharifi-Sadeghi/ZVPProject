@@ -8,10 +8,10 @@
 
 extern Game* game;
 
-SecondStage::SecondStage(int part){
-    qDebug() << part;
+SecondStage::SecondStage(){
+
     second = 0;
-    this->part = part;
+    part = 1;
     dice();
     game->setUpMoneyTextItem();
     game->scene->setBackgroundBrush(QBrush(QImage(":/images/secondStage.png")));
@@ -75,7 +75,7 @@ void SecondStage::timeCounter(){
         }
     }else if(part == 2){
 
-        qDebug() << second;
+
         if(second == 45){
             Zombie* zombie = new Zombie(800,firstRow,1,4,false);
             connect(zombie,SIGNAL(endReached()),this,SLOT(defeat()));
@@ -122,11 +122,10 @@ void SecondStage::timeCounter(){
     }
 }
 
-void SecondStage::showPartVictory(){
 
-}
 
 void SecondStage::defeat(){
+
     game->scene->clear();
     game->showDefeated();
     game->toBePlacedType = 0;
@@ -135,7 +134,8 @@ void SecondStage::defeat(){
 }
 
 void SecondStage::dice(){
-    int x = rand()/RAND_MAX;
+
+    double x = (double)rand()/RAND_MAX;
     if(x > 0.5){
         firstRow = 234;
         secondRow = 384;

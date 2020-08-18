@@ -8,7 +8,7 @@
 class ThirdStage : public QObject{
     Q_OBJECT
 public:
-    ThirdStage(int );
+    ThirdStage();
 public slots:
     void timeCounter();
     void defeat();

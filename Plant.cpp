@@ -4,7 +4,7 @@
 extern Game* game;
 
 Plant::Plant(int x, int y,int currentField, QGraphicsItem *parent) : QObject(), QGraphicsPixmapItem(parent){
-    setPos(x,y);
+    setPos(x, y);
     this->currentField = currentField;
     game->scene->addItem(this);
 }

@@ -8,10 +8,11 @@
 
 extern Game* game;
 
-ThirdStage::ThirdStage(int part){
+ThirdStage::ThirdStage(){
 
+    part = 1;
     second = 0;
-    this->part = part;
+
     dice();
 
     game->setUpMoneyTextItem();
@@ -33,7 +34,7 @@ ThirdStage::ThirdStage(int part){
 
 void ThirdStage::timeCounter(){
     second++;
-    qDebug() << second;
+
     if(part == 1){
         if(second == 40){
             Zombie* zombie = new Zombie(800,firstRow,1,4,false);
@@ -222,18 +223,18 @@ void ThirdStage::timeCounter(){
 }
 
 void ThirdStage::defeat(){
-    game->toBePlacedType = 0;
-    qDebug() << "first line";
-    game->scene->clear();
-    qDebug() << "second line";
+
+    game->toBePlacedType = 0;    
+    game->scene->clear();   
     game->showDefeated();
-    qDebug() << "third line";
+
     delete this;
 }
 
 void ThirdStage::dice(){
-    int x = rand()/RAND_MAX * 3/2;
-    int y = rand()/RAND_MAX;
+
+    double x = (double)rand()/RAND_MAX * 3/2;
+    double y = (double)rand()/RAND_MAX;
     if(x < 0.5){
         firstRow = 234;
         if(y < 0.5){

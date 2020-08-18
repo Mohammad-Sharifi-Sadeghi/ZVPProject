@@ -12,7 +12,7 @@ class SunFlower : public Plant{
         Q_OBJECT
 public:
     SunFlower(int, int, int, QGraphicsItem* = 0);
-    int currentField;
+
 
 };
 

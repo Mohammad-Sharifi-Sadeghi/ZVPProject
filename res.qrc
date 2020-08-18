@@ -17,7 +17,6 @@
         <file>zombieBoss.png</file>
     </qresource>
     <qresource prefix="/musics">
-        <file>victory.mp3</file>
         <file>zombieBite.ogg</file>
         <file>zombieBossGroan.ogg</file>
         <file>zombieGroan.ogg</file>

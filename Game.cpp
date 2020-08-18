@@ -4,7 +4,7 @@
 #include <stdlib.h> // srand() and rand()
 #include <time.h> // time()
 #include <QDebug>
-#include "Firststage.h"
+#include "FirstStage.h"
 #include "ShooterPlant.h"
 #include <QFont>
 #include "Sun.h"
@@ -25,9 +25,12 @@ Game::Game(QWidget *parent){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(800,750);
-
+    money = 0;
     toBePlacedType = 0;
-    player = new QMediaPlayer();
+    victoryPlayer = new QMediaPlayer();
+    victoryPlayer->setMedia(QUrl("qrc:/musics/stageVictory.ogg"));
+    defeatPlayer = new QMediaPlayer();
+    defeatPlayer->setMedia(QUrl("qrc:/musics/stageDefeat.ogg"));
     // set up the scene
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,800,750);
@@ -84,7 +87,6 @@ void Game::mousePressEvent(QMouseEvent * event){
     }else if(event->x() < 491 && event->x() > 396 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0 && money >= 150 && stage > 2){
         toBePlacedType = 4;
     }else if(event->x() < 645 && event->x() > 491 && event->y() > 8 && event->y() < 138 && event->button() == Qt::LeftButton && toBePlacedType == 0){
-        qDebug() << "taking shovel";
         toBePlacedType = 5;
     }
      //first row placing card section
@@ -96,7 +98,6 @@ void Game::mousePressEvent(QMouseEvent * event){
                     isFieldFull[i+1] = true;
                     toBePlacedType = 0;
                     setMoney(getMoney() - 100);
-                    qDebug() << "using shooter";
                 }else if(toBePlacedType == 2){
                     Plant* sf = new SunFlower(i*100,234,i+1);
                     isFieldFull[i+1] = true;
@@ -105,7 +106,6 @@ void Game::mousePressEvent(QMouseEvent * event){
                 }
             }
                 if(toBePlacedType == 3){
-                     qDebug() << "using wallnut";
                      Wallnut* wn = new Wallnut(i*100,234);
                      toBePlacedType = 0;
                      setMoney(getMoney() - 150);
@@ -205,17 +205,20 @@ void Game::start(){
     // clear the screen
     scene->clear();
     // set up money
-    money = 0;
+
     //clearing the fields
     for(int i = 0;i < 22;++i){
         isFieldFull[i] = false;
     }
     if(stage == 1){
+        money = 50;
         FirstStage* fs = new FirstStage();
     }else if(stage == 2){
-        SecondStage* ss = new SecondStage(part);
+        money = 100;
+        SecondStage* ss = new SecondStage();
     }else if(stage == 3){
-        ThirdStage* ts = new ThirdStage(part);
+        money = 200;
+        ThirdStage* ts = new ThirdStage();
     }
 }
 
@@ -236,8 +239,13 @@ void Game::update(){
 void Game::showVictory(){
 // create the title text
 
-    player->setMedia(QUrl("qrc:/musics/stageVictory.ogg"));
-    player->play();
+
+
+    if(victoryPlayer->state()== QMediaPlayer::PlayingState){
+        victoryPlayer->setPosition(0);
+    }else if(victoryPlayer->state() == QMediaPlayer::StoppedState){
+        victoryPlayer->play();
+    }
     scene->setBackgroundBrush(QBrush(QImage(":/images/stagevictory.png")));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("Victory !!!"));
     QFont titleFont("comic sans",50);
@@ -269,8 +277,12 @@ void Game::showVictory(){
 }
 
 void Game::showDefeated(){
-    player->setMedia(QUrl("qrc:/musics/stageDefeat.ogg"));
-    player->play();
+    if(defeatPlayer->state()== QMediaPlayer::PlayingState){
+        defeatPlayer->setPosition(0);
+    }else if(defeatPlayer->state() == QMediaPlayer::StoppedState){
+        defeatPlayer->play();
+    }
+
     scene->clear();
     scene->setBackgroundBrush(QBrush(QImage(":/images/defeat.png")));
     QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("DEFEATED !!!"));
