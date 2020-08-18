@@ -235,32 +235,40 @@ void ThirdStage::dice(){
 
     double x = (double)rand()/RAND_MAX * 3/2;
     double y = (double)rand()/RAND_MAX;
+    qDebug() << x << "   " << y;
     if(x < 0.5){
         firstRow = 234;
         if(y < 0.5){
+            // 1 2 3
             secondRow = 384;
             thirdRow = 534;
         }else{
+            // 1 3 2
             secondRow = 534;
             thirdRow = 384;
         }
     }else if(x > 1){
-        firstRow = 534;
+
+        thirdRow = 234;
         if(y < 0.5){
-            secondRow = 234;
-            thirdRow = 384;
+            // 2 3 1
+            secondRow = 534;
+            firstRow = 384;
         }else{
+            // 3 2 1
             secondRow = 384;
-            thirdRow = 234;
+            firstRow = 534;
         }
     }else{
-        secondRow = 384;
+        secondRow = 234;
         if(y < 0.5){
-            firstRow = 234;
-            thirdRow = 384;
-        }else{
+            //2 1 3
             firstRow = 384;
-            thirdRow = 234;
+            thirdRow = 534;
+        }else{
+            //3 1 2
+            firstRow = 534;
+            thirdRow = 384;
         }
     }
 }
